@@ -52,13 +52,11 @@ Path trimPath(
           metric.extractPath(0.0, metric.length * percentage),
           Offset.zero,
         );
-        break;
       case PathTrimOrigin.begin:
         dest.addPath(
           metric.extractPath(metric.length * percentage, metric.length),
           Offset.zero,
         );
-        break;
     }
     if (firstOnly) {
       break;

@@ -1,22 +1,19 @@
 import 'dart:ui';
 
-/// Creates a new path that is drawn from the segments of `source`.
+/// Crea un nuevo camino (path) que se dibuja a partir de los segmentos de `source`.
 ///
-/// Dash intervals are controled by the `dashArray` - see [CircularIntervalList]
-/// for examples.
+/// Los intervalos de los trazos están controlados por `dashArray` - consulta [CircularIntervalList]
+/// para ejemplos.
 ///
-/// `dashOffset` specifies an initial starting point for the dashing.
+/// `dashOffset` especifica un punto de inicio inicial para los trazos.
 ///
-/// Passing a `source` that is an empty path will return an empty path.
+/// Pasar un `source` que sea un camino vacío devolverá un camino vacío.
 Path dashPath(
   Path source, {
   required CircularIntervalList<double> dashArray,
   DashOffset? dashOffset,
 }) {
-  assert(dashArray != null); // ignore: unnecessary_null_comparison
-
   dashOffset = dashOffset ?? const DashOffset.absolute(0.0);
-  // TODO: Is there some way to determine how much of a path would be visible today?
 
   final Path dest = Path();
   for (final PathMetric metric in source.computeMetrics()) {
@@ -35,23 +32,24 @@ Path dashPath(
   return dest;
 }
 
+// Enumeración que especifica el tipo de desplazamiento de trazos.
 enum _DashOffsetType { Absolute, Percentage }
 
-/// Specifies the starting position of a dash array on a path, either as a
-/// percentage or absolute value.
+/// Especifica la posición de inicio de una serie de trazos en un camino, ya sea como
+/// un porcentaje o un valor absoluto.
 ///
-/// The internal value will be guaranteed to not be null.
+/// El valor interno no será nulo.
 class DashOffset {
-  /// Create a DashOffset that will be measured as a percentage of the length
-  /// of the segment being dashed.
+  /// Crea un DashOffset que se medirá como un porcentaje de la longitud
+  /// del segmento que se está trazando.
   ///
-  /// `percentage` will be clamped between 0.0 and 1.0.
+  /// `percentage` se ajustará entre 0.0 y 1.0.
   DashOffset.percentage(double percentage)
       : _rawVal = percentage.clamp(0.0, 1.0),
         _dashOffsetType = _DashOffsetType.Percentage;
 
-  /// Create a DashOffset that will be measured in terms of absolute pixels
-  /// along the length of a [Path] segment.
+  /// Crea un DashOffset que se medirá en términos de píxeles absolutos
+  /// a lo largo de la longitud de un segmento de [Path].
   const DashOffset.absolute(double start)
       : _rawVal = start,
         _dashOffsetType = _DashOffsetType.Absolute;
@@ -66,6 +64,7 @@ class DashOffset {
   }
 
   @override
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
@@ -77,18 +76,18 @@ class DashOffset {
   }
 
   @override
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode => Object.hash(_rawVal, _dashOffsetType);
 }
 
-/// A circular array of dash offsets and lengths.
+/// Una lista circular de desplazamientos y longitudes de trazos.
 ///
-/// For example, the array `[5, 10]` would result in dashes 5 pixels long
-/// followed by blank spaces 10 pixels long.  The array `[5, 10, 5]` would
-/// result in a 5 pixel dash, a 10 pixel gap, a 5 pixel dash, a 5 pixel gap,
-/// a 10 pixel dash, etc.
+/// Por ejemplo, la lista `[5, 10]` resultaría en trazos de 5 píxeles de largo
+/// seguidos de espacios en blanco de 10 píxeles de largo. La lista `[5, 10, 5]`
+/// resultaría en un trazo de 5 píxeles, un espacio de 10 píxeles, un trazo de 5 píxeles,
+/// un espacio de 5 píxeles, un trazo de 10 píxeles, etc.
 ///
-/// Note that this does not quite conform to an [Iterable<T>], because it does
-/// not have a moveNext.
+/// Ten en cuenta que esto no se ajusta completamente a un [Iterable<T>], ya que no tiene un moveNext.
 class CircularIntervalList<T> {
   CircularIntervalList(this._vals);
 

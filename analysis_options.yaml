@@ -1,4 +1,246 @@
-include: package:flutter_lints/flutter.yaml
-
-# Additional information about this file can be found at
+# Specify analysis options.
+#
+# For a list of lints, see: https://dart.dev/lints
+# For guidelines on configuring static analysis, see:
 # https://dart.dev/guides/language/analysis-options
+#
+# There are other similar analysis options files in the flutter repos,
+# which should be kept in sync with this file:
+#
+#   - analysis_options.yaml (this file)
+#   - https://github.com/flutter/engine/blob/main/analysis_options.yaml
+#   - https://github.com/flutter/packages/blob/main/analysis_options.yaml
+#
+# This file contains the analysis options used for code in the flutter/flutter
+# repository.
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-raw-types: true
+  errors:
+    # allow self-reference to deprecated members (we do this because otherwise we have
+    # to annotate every member in every test, assert, etc, when we deprecate something)
+    deprecated_member_use_from_same_package: ignore
+  exclude:
+    - "bin/cache/**"
+    # Ignore protoc generated files
+    - "dev/conductor/lib/proto/*"
+    - "lib/firebase_options.dart"
+    - "**/*.g.dart"
+
+linter:
+  rules:
+    - always_declare_return_types  # Siempre declarar tipos de retorno
+    - always_put_control_body_on_new_line  # Siempre colocar el cuerpo de control en una nueva línea
+    # - always_put_required_named_parameters_first  # Preferimos tener parámetros en el mismo orden que los campos (https://github.com/flutter/flutter/issues/10219)
+    - always_specify_types  # Siempre especificar tipos
+    # - always_use_package_imports  # Lo hacemos comúnmente
+    - annotate_overrides  # Anotar anulaciones
+    # - avoid_annotating_with_dynamic  # En conflicto con always_specify_types
+    - avoid_bool_literals_in_conditional_expressions  # Evitar literales booleanos en expresiones condicionales
+    # - avoid_catches_without_on_clauses  # Bloqueado en https://github.com/dart-lang/linter/issues/3023
+    # - avoid_catching_errors  # Bloqueado en https://github.com/dart-lang/linter/issues/3023
+    # - avoid_classes_with_only_static_members  # Lo hacemos comúnmente para clases 'abstract final'
+    - avoid_double_and_int_checks  # Evitar comprobaciones de double e int
+    - avoid_dynamic_calls  # Evitar llamadas dinámicas
+    - avoid_empty_else  # Evitar 'else' vacío
+    - avoid_equals_and_hash_code_on_mutable_classes  # Evitar equals y hashCode en clases mutables
+    - avoid_escaping_inner_quotes  # Evitar comillas internas escapadas
+    - avoid_field_initializers_in_const_classes  # Evitar inicializadores de campo en clases const
+    # - avoid_final_parameters  # Incompatible con prefer_final_parameters
+    - avoid_function_literals_in_foreach_calls  # Evitar literales de función en llamadas a foreach
+    - avoid_implementing_value_types  # Evitar implementar tipos de valor
+    - avoid_init_to_null  # Evitar inicializar a null
+    - avoid_js_rounded_ints  # Evitar ints redondeados de JS
+    # - avoid_multiple_declarations_per_line  # Parece ser una elección estilística a la que no nos adherimos
+    - avoid_null_checks_in_equality_operators  # Evitar comprobaciones de null en operadores de igualdad
+    # - avoid_positional_boolean_parameters  # Hubiera sido bueno habilitar esto, pero ahora hay demasiados lugares que lo rompen
+    - avoid_print  # Evitar print
+    # - avoid_private_typedef_functions  # Preferimos tener typedef (discusión en https://github.com/flutter/flutter/pull/16356)
+    - avoid_redundant_argument_values  # Evitar valores de argumento redundantes
+    - avoid_relative_lib_imports  # Evitar importaciones relativas de librerías
+    - avoid_renaming_method_parameters  # Evitar cambiar el nombre de los parámetros de método
+    - avoid_return_types_on_setters  # Evitar tipos de retorno en setters
+    - avoid_returning_null_for_void  # Evitar retornar null para void
+    # - avoid_returning_this  # Hay suficientes razones válidas para devolver 'this' que esta regla tiene demasiados falsos positivos
+    - avoid_setters_without_getters  # Evitar setters sin getters
+    - avoid_shadowing_type_parameters  # Evitar ocultar parámetros de tipo
+    - avoid_single_cascade_in_expression_statements  # Evitar un solo cascade en expresiones de sentencia
+    - avoid_slow_async_io  # Evitar E/S asincrónica lenta
+    - avoid_type_to_string  # Evitar type.toString()
+    - avoid_types_as_parameter_names  # Evitar tipos como nombres de parámetro
+    # - avoid_types_on_closure_parameters  # En conflicto con always_specify_types
+    - avoid_unnecessary_containers  # Evitar contenedores innecesarios
+    - avoid_unused_constructor_parameters  # Evitar parámetros de constructor no utilizados
+    - avoid_void_async  # Evitar async void
+    # - avoid_web_libraries_in_flutter  # Usamos bibliotecas web en código específico para la web, y nuestras pruebas nos impiden usarlas en otros lugares
+    - await_only_futures  # Esperar solo futuros
+    - camel_case_extensions  # Extensiones en camel case
+    - camel_case_types  # Tipos en camel case
+    - cancel_subscriptions  # Cancelar suscripciones
+    - cast_nullable_to_non_nullable  # Convertir nullable a non-nullable
+    # - close_sinks  # No es lo suficientemente confiable
+    - collection_methods_unrelated_type  # Métodos de colección con tipo no relacionado
+    - combinators_ordering  # Orden de combinadores
+    # - comment_references  # Bloqueado en https://github.com/dart-lang/linter/issues/1142
+    - conditional_uri_does_not_exist  # URI condicional que no existe
+    # - constant_identifier_names  # Necesita una opción para desactivarla (https://github.com/dart-lang/linter/issues/204)
+    - control_flow_in_finally  # Flujo de control en finally
+    - curly_braces_in_flow_control_structures  # Llaves en estructuras de control de flujo
+    - dangling_library_doc_comments  # Comentarios de documentación de librería sin uso
+    # - depend_on_referenced_packages  # Depender de paquetes referenciados
+    - deprecated_consistency  # Coherencia en lo deprecado
+    # - deprecated_member_use_from_same_package  # Permitimos referencias a miembros deprecados desde el mismo paquete
+    # - diagnostic_describe_all_properties  # Habilitado solo a nivel del framework (packages/flutter/lib)
+    - directives_ordering  # Orden de directivas
+    # - discarded_futures  # Demasiados falsos positivos, similar a unawaited_futures
+    # - do_not_use_environment  # Hay momentos apropiados para usar el entorno, especialmente en nuestras pruebas y lógica de compilación
+    - empty_catches  # Capturas vacías
+    - empty_constructor_bodies  # Cuerpos de constructor vacíos
+    - empty_statements  # Sentencias vacías
+    - eol_at_end_of_file  # Fin de línea al final del archivo
+    - exhaustive_cases  # Casos exhaustivos
+    - file_names  # Nombres de archivos
+    - flutter_style_todos  # TODOs en estilo Flutter
+    - hash_and_equals  # Hash y equals
+    - implementation_imports  # Importaciones de implementación
+    - implicit_call_tearoffs  # Llamadas implícitas a tear-offs
+    - implicit_reopen  # Reapertura implícita
+    - invalid_case_patterns  # Patrones de casos inválidos
+    # - join_return_with_assignment  # No requerido por el estilo de Flutter
+    - leading_newlines_in_multiline_strings  # Líneas nuevas iniciales en cadenas multilinea
+    - library_annotations  # Anotaciones de librería
+    - library_names  # Nombres de librería
+    - library_prefixes  # Prefijos de librería
+    # - library_private_types_in_public_api
+    # - lines_longer_than_80_chars  # Longitud máxima de 80 caracteres por linea
+    # - literal_only_boolean_expressions  # Demasiados falsos positivos: https://github.com/dart-lang/linter/issues/453
+    # - matching_super_parameters  # Bloqueado en https://github.com/dart-lang/language/issues/2509
+    - missing_whitespace_between_adjacent_strings  # Espacio en blanco faltante entre cadenas adyacentes
+    - no_adjacent_strings_in_list  # No hay cadenas adyacentes en lista
+    # - no_default_cases  # No hay casos predeterminados
+    - no_duplicate_case_values  # No hay valores de caso duplicados
+    - no_leading_underscores_for_library_prefixes  # No hay guiones bajos iniciales para prefijos de librería
+    - no_leading_underscores_for_local_identifiers  # No hay guiones bajos iniciales para identificadores locales
+    - no_literal_bool_comparisons  # No hay comparaciones literales de booleanos
+    - no_logic_in_create_state  # No hay lógica en createState
+    # - no_runtimeType_toString  # Aceptable en pruebas; lo habilitamos solo en packages/
+    - non_constant_identifier_names  # Nombres de identificadores no constantes
+    - noop_primitive_operations  # Operaciones primitivas sin efecto
+    - null_check_on_nullable_type_parameter  # Comprobación de null en parámetro de tipo nullable
+    - null_closures  # Cierres null
+    # - omit_local_variable_types  # Opuesto a always_specify_types
+    # - one_member_abstracts  # Demasiados falsos positivos
+    - only_throw_errors  # Solo lanzar errores; esto se desactiva en algunos lugares donde tenemos código heredado que usa strings, etc.
+    - overridden_fields  # Campos anulados
+    - package_api_docs  # Documentación de API de paquete
+    - package_names  # Nombres de paquetes
+    - package_prefixed_library_names  # Nombres de librerías con prefijo de paquete
+    # - parameter_assignments  # Lo hacemos comúnmente
+    - prefer_adjacent_string_concatenation  # Preferir concatenación de cadenas adyacentes
+    - prefer_asserts_in_initializer_lists  # Preferir asserts en listas de inicializadores
+    # - prefer_asserts_with_message  # No requerido por el estilo de Flutter
+    - prefer_collection_literals  # Preferir literales de colección
+    - prefer_conditional_assignment  # Preferir asignación condicional
+    - prefer_const_constructors  # Preferir constructores const
+    - prefer_const_constructors_in_immutables  # Preferir constructores const en inmutables
+    - prefer_const_declarations  # Preferir declaraciones const
+    - prefer_const_literals_to_create_immutables  # Preferir literales const para crear objetos inmutables
+    # - prefer_constructors_over_static_methods  # Demasiados falsos positivos
+    - prefer_contains  # Preferir contains
+    # - prefer_double_quotes  # Opuesto a prefer_single_quotes
+    # - prefer_expression_function_bodies  # En conflicto con https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#consider-using--for-short-functions-and-methods
+    - prefer_final_fields  # Preferir campos finales
+    - prefer_final_in_for_each  # Preferir final en forEach
+    - prefer_final_locals  # Preferir locales finales
+    # - prefer_final_parameters  # Agrega demasiada verbosidad
+    - prefer_for_elements_to_map_fromIterable  # Preferir for elements en lugar de map fromIterable
+    - prefer_foreach  # Preferir forEach
+    - prefer_function_declarations_over_variables  # Preferir declaraciones de función sobre variables
+    - prefer_generic_function_type_aliases  # Preferir alias de tipo de función genérica
+    - prefer_if_elements_to_conditional_expressions  # Preferir if elements a expresiones condicionales
+    - prefer_if_null_operators  # Preferir operadores if-null
+    - prefer_initializing_formals  # Preferir parámetros formales de inicialización
+    - prefer_inlined_adds  # Preferir sumas en línea
+    # - prefer_int_literals  # En conflicto con https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#use-double-literals-for-double-constants
+    - prefer_interpolation_to_compose_strings  # Preferir interpolación para componer cadenas
+    - prefer_is_empty  # Preferir isEmpty
+    - prefer_is_not_empty  # Preferir isNotEmpty
+    - prefer_is_not_operator  # Preferir is! en lugar de negar is
+    - prefer_iterable_whereType  # Preferir iterable.whereType
+    - prefer_mixin  # Preferir mixin
+    # - prefer_null_aware_method_calls  # "call()" es confuso para las personas nuevas en el lenguaje ya que no está documentado en ninguna parte
+    - prefer_null_aware_operators  # Preferir operadores null-aware
+    - prefer_relative_imports  # Preferir importaciones relativas
+    - prefer_single_quotes  # Preferir comillas simples
+    - prefer_spread_collections  # Preferir colecciones spread
+    - prefer_typing_uninitialized_variables  # Preferir tipado de variables no inicializadas
+    - prefer_void_to_null  # Preferir void en lugar de null
+    - provide_deprecation_message  # Proporcionar mensaje de deprecación
+    # - public_member_api_docs  # Habilitado caso por caso; ver por ejemplo packages/analysis_options.yaml
+    - recursive_getters  # Getters recursivos
+    # - require_trailing_commas  # Sería bueno, pero requiere mucho trabajo manual: se necesitaría reformatear a mano más de 10,000 ubicaciones de código después de aplicar la corrección masiva
+    - secure_pubspec_urls  # URLs seguras en pubspec
+    - sized_box_for_whitespace  # SizedBox para espacios en blanco
+    - sized_box_shrink_expand  # SizedBox shrink y expand
+    - slash_for_doc_comments  # Diagonal para comentarios de documentación
+    - sort_child_properties_last  # Ordenar propiedades de child al final
+    - sort_constructors_first  # Ordenar constructores al principio
+    # - sort_pub_dependencies  # Evita separar las dependencias transitivas fijadas
+    - sort_unnamed_constructors_first  # Ordenar constructores sin nombre al principio
+    - test_types_in_equals  # Tipos de prueba en equals
+    - throw_in_finally  # throw en finally
+    - tighten_type_of_initializing_formals  # Ajustar tipo de parámetros formales de inicialización
+    # - type_annotate_public_apis  # Subconjunto de always_specify_types
+    - type_init_formals  # Tipar parámetros formales de inicialización
+    - type_literal_in_constant_pattern  # Literal de tipo en patrón constante
+    # - unawaited_futures  # Demasiados falsos positivos, especialmente con la forma en que AnimationController funciona
+    - unnecessary_await_in_return  # await innecesario en return
+    - unnecessary_brace_in_string_interps  # Llave innecesaria en interpolaciones de cadenas
+    - unnecessary_breaks  # Breaks innecesarios
+    - unnecessary_const  # Const innecesario
+    - unnecessary_constructor_name  # Nombre de constructor innecesario
+    # - unnecessary_final  # En conflicto con prefer_final_locals
+    - unnecessary_getters_setters  # Getters y setters innecesarios
+    # - unnecessary_lambdas  # Tiene falsos positivos: https://github.com/dart-lang/linter/issues/498
+    - unnecessary_late  # Late innecesario
+    - unnecessary_library_directive  # Directiva de librería innecesaria
+    - unnecessary_new  # New innecesario
+    - unnecessary_null_aware_assignments  # Asignaciones null-aware innecesarias
+    - unnecessary_null_aware_operator_on_extension_on_nullable  # Operador null-aware innecesario en extensión en nullable
+    - unnecessary_null_checks  # Comprobaciones de null innecesarias
+    - unnecessary_null_in_if_null_operators  # Null innecesario en operadores if-null
+    - unnecessary_nullable_for_final_variable_declarations  # Nullable innecesario para declaraciones de variables finales
+    - unnecessary_overrides  # Anulaciones innecesarias
+    - unnecessary_parenthesis  # Paréntesis innecesarios
+    # - unnecessary_raw_strings  # Lo que es "necesario" es una cuestión de opinión; la consistencia en las cadenas puede ayudar a la legibilidad más que esta regla
+    - unnecessary_statements  # Sentencias innecesarias
+    - unnecessary_string_escapes  # Escapes de cadena innecesarios
+    - unnecessary_string_interpolations  # Interpolaciones de cadena innecesarias
+    - unnecessary_this  # This innecesario
+    - unnecessary_to_list_in_spreads  # toList innecesario en spreads
+    - unreachable_from_main  # Inalcanzable desde main
+    - unrelated_type_equality_checks  # Comprobaciones de igualdad de tipos no relacionados
+    - unsafe_html  # HTML inseguro
+    # - use_build_context_synchronously  # Alerta al usar BuildContext sincrónicamente
+    - use_colored_box  # Usar ColoredBox
+    # - use_decorated_box  # Conduce a errores: DecoratedBox y Container no son equivalentes (Container inserta un relleno adicional)
+    - use_enums  # Usar enums
+    - use_full_hex_values_for_flutter_colors  # Usar valores hexadecimales completos para los colores de Flutter
+    - use_function_type_syntax_for_parameters  # Usar sintaxis de tipo de función para parámetros
+    - use_if_null_to_convert_nulls_to_bools  # Usar if-null para convertir nulls a booleanos
+    - use_is_even_rather_than_modulo  # Usar isEven en lugar de módulo
+    - use_key_in_widget_constructors  # Usar Key en constructores de widgets
+    # - use_late_for_private_fields_and_variables  # Usar late para campos y variables privadas
+    - use_named_constants  # Usar constantes con nombre
+    - use_raw_strings  # Usar cadenas sin procesar
+    - use_rethrow_when_possible  # Usar rethrow cuando sea posible
+    - use_setters_to_change_properties  # Usar setters para cambiar propiedades
+    # - use_string_buffers  # Tiene falsos positivos: https://github.com/dart-lang/sdk/issues/34182
+    - use_string_in_part_of_directives  # Usar strings en directivas part of
+    - use_super_parameters  # Usar parámetros super
+    - use_test_throws_matchers  # Usar lanzadores de pruebas (test_throws_matchers)
+    # - use_to_and_as_if_applicable  # Tiene falsos positivos, por lo que preferimos detectar esto mediante revisión de código
+    - valid_regexps  # Expresiones regulares válidas
+    - void_checks  # Comprobaciones de void

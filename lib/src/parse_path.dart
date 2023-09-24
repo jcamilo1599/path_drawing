@@ -13,7 +13,7 @@ Path parseSvgPathData(String svg) {
   final SvgPathStringSource parser = SvgPathStringSource(svg);
   final FlutterPathProxy path = FlutterPathProxy();
   final SvgPathNormalizer normalizer = SvgPathNormalizer();
-  for (PathSegmentData seg in parser.parseSegments()) {
+  for (final PathSegmentData seg in parser.parseSegments()) {
     normalizer.emitSegment(seg, path);
   }
   return path.path;
